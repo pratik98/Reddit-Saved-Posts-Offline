@@ -18,7 +18,7 @@ public class RedditPost {
     private String created;
 
     //t3 = entire thread
-    private String title;
+    private String title = null;
     private String url;
     private String selftext;
     private Boolean is_self;
@@ -28,7 +28,7 @@ public class RedditPost {
     //t1 = comment
     private String link_title;
     private String link_url;
-    private String body;
+    private String body = null;
     private String link_author;
     private ArrayList<String> imgURLList;
 

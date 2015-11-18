@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Minimal-Saved-Reddit.iml" filepath="$PROJECT_DIR$/Minimal-Saved-Reddit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Reddit-Saved-Posts-Offline.iml" filepath="$PROJECT_DIR$/Reddit-Saved-Posts-Offline.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
