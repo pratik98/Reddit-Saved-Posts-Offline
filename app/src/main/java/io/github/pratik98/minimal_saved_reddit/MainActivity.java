@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,35 +45,41 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-
     }
 
     private ArrayList<RedditPost> fetchRedditPosts() {
-        File sdcard = Environment.getExternalStorageDirectory();
-        File saved_posts = new File(sdcard,"data.txt");
         ArrayList<RedditPost> postsObjlist = null;
-        try {
-            String posts_text = FileUtils.readFileToString(saved_posts);
-            JSONObject posts_json,posts_json2;
-            JSONArray posts;
+        File sdcard = new File(Environment.getExternalStorageDirectory(),"reddit");
+        File saved_posts = new File(sdcard,"posts.txt");
+        Log.i("Step5 done,","Display posts" );
+        if(saved_posts.length() > 0) {
+
             try {
-                posts_json = new JSONObject(posts_text);
-                posts_json2 = posts_json.getJSONObject("data");
-                posts =posts_json2.getJSONArray("children");
-                Toast.makeText(getApplicationContext(), "" + posts.length(), Toast.LENGTH_LONG).show();
-                 postsObjlist = RedditPost.fromJsonArray(posts);
+                String posts_text = FileUtils.readFileToString(saved_posts);
+                JSONObject posts_json, posts_json2;
+                JSONArray posts;
+                try {
+                    posts_json = new JSONObject(posts_text);
+                    posts_json2 = posts_json.getJSONObject("data");
+                    posts = posts_json2.getJSONArray("children");
+                    Toast.makeText(getApplicationContext(), "" + posts.length(), Toast.LENGTH_LONG).show();
+                    postsObjlist = RedditPost.fromJsonArray(posts);
 
-                return postsObjlist;
+                    return postsObjlist;
 
-            } catch (JSONException e) {
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return postsObjlist;
+                }
+            } catch (IOException e) {
                 e.printStackTrace();
                 return postsObjlist;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return  postsObjlist;
+        }else
+        {
+            Toast.makeText(MainActivity.this,"There isn't seem to anything to read!",Toast.LENGTH_SHORT).show();
         }
+        return postsObjlist;
     }
 
     @Override
