@@ -60,7 +60,13 @@ public class LoginAuthenticate extends AppCompatActivity {
         setContentView(R.layout.login_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+		// if already logged in once, redirect to saved posts  
+		File appdir = new File(Environment.getExternalStorageDirectory(),"reddit");
+                    if(appdir.exists())
+                    {
+                         Intent i = new Intent(this,MainActivity.class);
+						startActivity(i);
+                    }
         pref = getSharedPreferences("AppPref", MODE_PRIVATE);
         Access =(TextView)findViewById(R.id.Access);
         auth = (Button)findViewById(R.id.auth);
